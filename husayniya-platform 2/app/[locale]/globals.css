@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Use logical properties app-wide so RTL/LTR flip with zero extra CSS. */
+body {
+  text-align: start;
+}

@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Locale {
+  ar
+  de
+  en
+  fa
+}
+
+enum ContentType {
+  NEWS
+  SERVICE
+  ACTIVITY
+  FAQ
+  PAGE
+}
+
+// One row per real-world item (a news post, a service, an activity...).
+// Locale-independent fields (image, status, dates) live here so they're
+// never duplicated across languages.
+model Content {
+  id           String        @id @default(cuid())
+  type         ContentType
+  slug         String        @unique
+  image        String?
+  status       ContentStatus @default(DRAFT)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  translations ContentTranslation[]
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+// One row per (content, locale) pair. Missing rows = missing translation;
+// the app falls back to the `ar` row and the admin UI flags the gap.
+model ContentTranslation {
+  id          String   @id @default(cuid())
+  contentId   String
+  content     Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  locale      Locale
+  title       String
+  description String?
+  body        String?
+
+  @@unique([contentId, locale])
+  @@index([locale])
+}
+
+// The land-purchase fundraising campaign. Only one active campaign is
+// expected, but modeled as a table so history/future campaigns are possible.
+model DonationCampaign {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  goalCents   Int // store money as integer cents, never floats
+  raisedCents Int      @default(0)
+  areaSqm     Int? // e.g. 700 for the ~700 m² land target
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  translations DonationCampaignTranslation[]
+  donations    Donation[]
+}
+
+model DonationCampaignTranslation {
+  id          String  @id @default(cuid())
+  campaignId  String
+  campaign    DonationCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  locale      Locale
+  title       String
+  description String?
+
+  @@unique([campaignId, locale])
+}
+
+enum DonationMethod {
+  BANK_TRANSFER
+  PAYPAL
+}
+
+// Individual donation records — kept minimal here; extend with donor info
+// per your data-protection (DSGVO) requirements and only what's necessary.
+model Donation {
+  id           String         @id @default(cuid())
+  campaignId   String
+  campaign     DonationCampaign @relation(fields: [campaignId], references: [id])
+  amountCents  Int
+  method       DonationMethod
+  donorName    String?
+  donorEmail   String?
+  reference    String? // "Verwendungszweck" shown to the donor
+  createdAt    DateTime       @default(now())
+
+  @@index([campaignId])
+}
+
+// Religious quotes shown around the site — never auto-generated; source
+// must be recorded, and unverified quotes should not render as authentic.
+model Quote {
+  id         String   @id @default(cuid())
+  textAr     String
+  textDe     String?
+  textEn     String?
+  textFa     String?
+  source     String? // e.g. book/hadith collection reference
+  author     String?
+  category   String?
+  isVerified Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}

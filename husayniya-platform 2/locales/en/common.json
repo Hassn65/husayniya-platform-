@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "donate": "Donate Now",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Together Building a Permanent Home in Karlsruhe",
+    "subtitle": "Fundraising campaign to purchase land and eliminate high rental costs."
+  },
+  "donation": {
+    "title": "Support Our Land Purchase Project",
+    "goal": "Goal",
+    "raised": "Raised",
+    "remaining": "Remaining",
+    "progress": "Progress",
+    "bank_transfer": "Bank Transfer",
+    "paypal": "Donate with PayPal",
+    "iban": "IBAN",
+    "bic": "BIC / SWIFT",
+    "holder": "Account Holder",
+    "purpose": "Payment Reference"
+  },
+  "services": {
+    "title": "Our Services & Activities",
+    "school": "Children School & Arabic Classes",
+    "quran": "Quranic Studies & Recitation",
+    "majalis": "Husayni Majalis & Religious Events",
+    "social": "Social Services & Community Support"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "services": "Angebote",
+    "donate": "Jetzt spenden",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "title": "Gemeinsam bauen wir ein dauerhaftes Zentrum in Karlsruhe",
+    "subtitle": "Spendenkampagne für den Kauf eines Grundstücks zur Aufhebung der Mietbelastung."
+  },
+  "donation": {
+    "title": "Unterstützen Sie unser Landkauf-Projekt",
+    "goal": "Ziel",
+    "raised": "Gesammelt",
+    "remaining": "Verbleibend",
+    "progress": "Fortschritt",
+    "bank_transfer": "Banküberweisung",
+    "paypal": "Spenden über PayPal",
+    "iban": "IBAN",
+    "bic": "BIC / SWIFT",
+    "holder": "Kontoinhaber",
+    "purpose": "Verwendungszweck"
+  },
+  "services": {
+    "title": "Unsere Angebote & Services",
+    "school": "Kinderschule & Arabischunterricht",
+    "quran": "Koran-Unterricht & Rezitation",
+    "majalis": "Husayniya-Veranstaltungen & Feiertage",
+    "social": "Soziale Dienste & Gemeinschaftshilfe"
+  }
+}

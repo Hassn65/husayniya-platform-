@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { locales, defaultLocale, LOCALE_COOKIE, type Locale } from "./lib/i18n/config";
+import { locales, defaultLocale, LOCALE_COOKIE, type Locale } from "@/lib/i18n/config";
 
 // Paths that should never be locale-prefixed (static assets, API routes, etc.)
 const PUBLIC_FILE = /\.(.*)$/;
